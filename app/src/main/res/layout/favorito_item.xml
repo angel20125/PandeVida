@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/libroTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="libro"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_alignBaseline="@+id/capituloTV"
+        android:layout_alignBottom="@+id/capituloTV"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:id="@+id/capituloTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="49dp"
+        android:text="capitulo"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/libroTV"
+        android:layout_toEndOf="@+id/libroTV" />
+    <TextView
+        android:id="@+id/versoTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="verso"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_alignBaseline="@+id/capituloTV"
+        android:layout_alignBottom="@+id/capituloTV"
+        android:layout_toRightOf="@+id/capituloTV"
+        android:layout_toEndOf="@+id/capituloTV"
+        android:layout_marginLeft="41dp"
+        android:layout_marginStart="41dp" />
+
+    <TextView
+        android:id="@+id/contenidoTV"
+        android:text="contenido"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/libroTV"
+        android:layout_alignLeft="@+id/libroTV"
+        android:layout_alignStart="@+id/libroTV"
+        android:layout_marginTop="27dp" />
+    <TextView
+        android:id="@+id/puntosTV"
+        android:text=":"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/capituloTV"
+        android:layout_toRightOf="@+id/libroTV"
+        android:layout_toEndOf="@+id/libroTV"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp" />
+
+</RelativeLayout>
