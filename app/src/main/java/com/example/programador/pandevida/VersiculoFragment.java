@@ -90,6 +90,7 @@ public class VersiculoFragment extends Fragment {
         //  muestro lleno lista de capitulos
         Log.v("VersiculoFragment","-------------tamaño de lista-------------");
         Log.v("VersiculoFragment"," "+cantidadVersiculos.size());
+        Log.v("VersiculoFragment ", biblia.getOsis()+" "+biblia.getCapitulo()+" "+ ((int)biblia.getVerso()));
         recycler_versiculo.setLayoutManager(layoutManager);
         recycler_versiculo.setHasFixedSize(true);
         recycler_versiculo.setAdapter(adapter);

@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -18,6 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.example.programador.pandevida.MainActivity.biblia;
+import static com.example.programador.pandevida.MainActivity.mLecturaFragment;
 
 /**
  * Created by Ratan on 7/27/2015.
@@ -27,7 +29,6 @@ public class TabFragment extends Fragment {
     @BindView(R.id.tabs) public TabLayout tabLayout;
 
     @BindView(R.id.viewpager) public ViewPager viewPager;
-
     private int int_items = 4 ;
 
     private InterfazComunicacion interfaz;
@@ -194,9 +195,9 @@ public class TabFragment extends Fragment {
         @Override
         public void IrALectura(int versiculo) {
             Log.v("Angel  en TabFragment", "IrALectura: interfaz!! LLEGO AQUI!!");
-            viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
             fragmento_lectura.mostrarLectura(versiculo);
-           // viewPager.setCurrentItem((viewPager.getCurrentItem()+1));
+            viewPager.setCurrentItem((viewPager.getCurrentItem()+1));
+
         }
     }
 

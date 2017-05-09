@@ -26,17 +26,17 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
     // variables que se usan globalmente
     public static Biblia biblia= new Biblia();
-    //public static String [] arrayLibroOsis= new String[66];
     public static String [] arrayLibroHuman = new String[66];
-    //public static int []    arrayCapituloFinal = new int[66];
     public static List<String> cantidadCapitulos= new ArrayList<>();
     public static List<String> cantidadVersiculos= new ArrayList<>();
     public static List<String> cantidadVersos = new ArrayList<>();
     public static TabFragment tabFragment =new TabFragment();
+    public static LecturaFragment mLecturaFragment= new LecturaFragment();
     public static Context contextMain;
 
-    protected FragmentManager mFragmentManager;
-    protected FragmentTransaction mFragmentTransaction;
+    public FragmentManager mFragmentManager;
+    public FragmentTransaction mFragmentTransaction;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,22 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                /**
+                 *  Manejo del fragment y tab-layout
+                 *
+                 /**
+                 *Vamos a inflar el primer fragmento Aquí,
+                 *estamos inflando el TabFragment como el primer fragmento
+                 * */
+                if(mLecturaFragment.getView()==null){
+
+                }else{
+
+                }
+                mFragmentManager = getSupportFragmentManager();
+                mFragmentTransaction = mFragmentManager.beginTransaction();
+                mFragmentTransaction.replace(R.id.containerView,tabFragment).commit();
         contextMain=getApplicationContext();
             }
         });
@@ -63,17 +79,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        /**
-         *  Manejo del fragment y tab-layout
-         * */
-        /**
-         *Vamos a inflar el primer fragmento Aquí,
-         *estamos inflando el TabFragment como el primer fragmento
-         * */
+
 
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
-        mFragmentTransaction.replace(R.id.containerView,tabFragment).commit();
+        mFragmentTransaction.replace(R.id.containerView,mLecturaFragment).commit();
+        //mFragmentTransaction.replace(R.id.containerView,tabFragment).commit();
+
+
         /**
          * Setup click events on the Navigation View Items.
          */

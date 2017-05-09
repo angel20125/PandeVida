@@ -1,3 +1,4 @@
+
 package com.example.programador.pandevida;
 
 import android.database.Cursor;
@@ -26,12 +27,12 @@ import static com.example.programador.pandevida.MainActivity.arrayLibroHuman;
 import static com.example.programador.pandevida.MainActivity.biblia;
 import static com.example.programador.pandevida.MainActivity.cantidadVersos;
 
-
+/*Esta clase se encarga de consultar a la bases de datos para mostrar
+la lectura del libro, capitulo y versiculo mostrado*/
 public class LecturaFragment extends Fragment {
     //atributos
     @BindView(R.id.recycler_lectura) RecyclerView recycler_lectura;
     public  static InterfazComunicacion interfaz;
-
     //constructor
     public static LecturaFragment NewInstance(InterfazComunicacion inter) {
         LecturaFragment fragment = new LecturaFragment();
@@ -98,8 +99,9 @@ public class LecturaFragment extends Fragment {
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
+
         recycler_lectura.setLayoutManager(layoutManager);
-        recycler_lectura.scrollToPosition(versiculo-1);
+        recycler_lectura.scrollToPosition(versiculo-1);// en esta seccion se le dice al scroll que  se coloque en el versiculo seleccionado
         recycler_lectura.setHasFixedSize(true);
         recycler_lectura.setAdapter(adapter);
     }
