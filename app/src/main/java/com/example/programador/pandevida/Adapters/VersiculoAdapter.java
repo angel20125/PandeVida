@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.example.programador.pandevida.Interfaces.InterfazComunicacion;
+import com.example.programador.pandevida.Interfaces.InterfazComunicacionTabs;
 import com.example.programador.pandevida.R;
 
 import java.util.List;
@@ -25,8 +25,8 @@ public class VersiculoAdapter extends RecyclerView.Adapter<VersiculoAdapter.Vers
 
     //atributos
     List<String> versiculos;
-    InterfazComunicacion interfaz;
-    public VersiculoAdapter(List<String> versiculos, InterfazComunicacion interfaz){
+    InterfazComunicacionTabs interfaz;
+    public VersiculoAdapter(List<String> versiculos, InterfazComunicacionTabs interfaz){
         this.versiculos =versiculos;
         this.interfaz=interfaz;
     }
@@ -60,7 +60,8 @@ public class VersiculoAdapter extends RecyclerView.Adapter<VersiculoAdapter.Vers
                     biblia.setVerso((holder.getAdapterPosition()+1));
                     Log.v("Angel","VersiculoAdapter Numero de versiculo es: "+holder.getAdapterPosition()+1);
                     Log.v("Angel","VersiculoAdapter Numero de versiculo es: "+biblia.getVerso());
-                    interfaz.IrALectura((biblia.getVerso()));//donde se envia la informacion atraves de interfaz
+                    //ToDo Arreglar comunicacion de adapter con MainActivity
+                    interfaz.IrALectura();//donde se envia la informacion atraves de interfaz
                 }else{
                     Log.v("Angel","VersiculoAdapter Interfaz nula!");
                 }

@@ -8,17 +8,14 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.example.programador.pandevida.Interfaces.InterfazComunicacion;
+import com.example.programador.pandevida.Interfaces.InterfazComunicacionTabs;
 import com.example.programador.pandevida.R;
+import com.example.programador.pandevida.basesdedatos.Libro;
 
 import java.util.List;
 
-import butterknife.ButterKnife;
-
 
 import static com.example.programador.pandevida.MainActivity.biblia;
-import static com.example.programador.pandevida.MainActivity.cantidadCapitulos;
-
 /**
  * Created by angel20125 on 09/04/17.
  */
@@ -31,12 +28,12 @@ import static com.example.programador.pandevida.MainActivity.cantidadCapitulos;
 
 public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHolder>{
     //Atributos
-    List<String> libros;
-    InterfazComunicacion interfaz;
+    List<Libro> libros;
+    InterfazComunicacionTabs interfaz;
 
     //Constructutor de LibroAdapter, su fucnion  es:  recibir por parametro, los datos que se van a mostrar en este caso los libros.
-    //y la InterfazComunicacion, que es la encargada de comunicar los fragmentos
-    public LibroAdapter(List<String> libros, InterfazComunicacion interfaz) {
+    //y la InterfazComunicacionTabs, que es la encargada de comunicar los fragmentos
+    public LibroAdapter(List<Libro> libros, InterfazComunicacionTabs interfaz) {
         this.libros = libros;
         this.interfaz = interfaz;
     }
@@ -75,7 +72,7 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
 
         /*
         *En esta seccion se hace que la variable fondo que es  contenedor Framelayout  reacione al evento de tipo click y
-        *tambien en esta seccion es donde se envia la informacion atraves de la InterfazComunicacion para que los otros
+        *tambien en esta seccion es donde se envia la informacion atraves de la InterfazComunicacionTabs para que los otros
         *fragmentos puedan recibir la informacion.
         */
         /**
@@ -91,17 +88,12 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
             public void onClick(View v) {
                 //Your stuff here
                 if(interfaz!=null){
-                    //biblia.setLibro(arrayLibroOsis[holder.getAdapterPosition()]);
-                    //biblia.setCapitulo(holder.getAdapterPosition());
-                    Log.v("Angel"," LibroAdapter ERROR ENVIO EL NUMERO DE LIBRO "+ (holder.getAdapterPosition()+ 1) );
-                    Log.v("Angel"," LibroAdapter ERROR ENVIO EL NUMERO DE LIBRO "+ (holder.nombre_Libro.getText().toString()));
                     Log.v("Angel"," "+holder.nombre_Libro.getText());
 
-                    if ((cantidadCapitulos.size() !=0) && (biblia.getLibro() != holder.nombre_Libro.getText())){
-                        cantidadCapitulos.clear();
-                    }
                     biblia.setLibro(holder.nombre_Libro.getText().toString());
-                    interfaz.IrACapitulo((String) holder.nombre_Libro.getText());//donde se envia la informacion atraves de interfaz
+                    biblia.setOsis(libros.get(holder.getAdapterPosition()).getOsis());
+
+                    interfaz.IrACapitulo((String) holder.nombre_Libro.getText(),libros.get(holder.getAdapterPosition()).getCapitulos());//donde se envia la informacion atraves de interfaz
                 }else{
                     Log.v("Angel"," LibroAdpater Interfaz nula!");
                 }
@@ -113,7 +105,7 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
     //Asigna informacion a los componentes  holder, es decir perzonaliza cada libro_item con la informacion  correspondiente
     @Override
     public void onBindViewHolder(LibroViewHolder holder, int position) {
-        holder.nombre_Libro.setText(libros.get(position));
+        holder.nombre_Libro.setText(libros.get(position).getNombre());
     }
 
     @Override

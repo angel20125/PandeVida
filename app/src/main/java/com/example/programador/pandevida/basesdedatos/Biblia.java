@@ -26,10 +26,10 @@ public final class  Biblia extends Application implements Serializable  {
     //----------------------METODOS DE LA BIBILIA-------------------------//
     public  Biblia (){
 
-        libro="";
-        setOsis("");
-        capitulo=0;
-        verso=0;
+        libro="Génesis";
+        setOsis("Gen");
+        capitulo=1;
+        verso=1;
         versoFinal=0;
         capituloFinal=0;
         contenido="";

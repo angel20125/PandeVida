@@ -1,7 +1,5 @@
 package com.example.programador.pandevida;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,37 +9,27 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.programador.pandevida.Adapters.CapituloAdapter;
-import com.example.programador.pandevida.Interfaces.InterfazComunicacion;
-import com.example.programador.pandevida.basesdedatos.MyDataBase;
-
-import java.io.Serializable;
-import java.lang.reflect.Array;
+import com.example.programador.pandevida.Interfaces.InterfazComunicacionTabs;
 import java.util.ArrayList;
-import java.util.Arrays;
-
+import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.R.attr.x;
-import static com.example.programador.pandevida.MainActivity.arrayLibroHuman;
-
-import static com.example.programador.pandevida.MainActivity.biblia;
-import static com.example.programador.pandevida.MainActivity.cantidadCapitulos;
-
 /*
-* Clase CapituloFragment encargada pasar  por parameto  la InterfazComunicacion
+* Clase CapituloFragment encargada pasar  por parameto  la InterfazComunicacionTabs
 * */
 public class CapituloFragment extends Fragment {
+
+    CapituloAdapter adapter;
 
     private int numeroCapitulos;
     //Atributos
     @BindView(R.id.recycler_capitulo) RecyclerView recycler_capitulo;
-    private static InterfazComunicacion interfaz;
+    private static InterfazComunicacionTabs interfaz;
 
     //constructor
-    public static CapituloFragment NewInstance(InterfazComunicacion inter) {
+    public static CapituloFragment NewInstance(InterfazComunicacionTabs inter) {
         CapituloFragment fragment = new CapituloFragment();
         interfaz = inter;
         return fragment;
@@ -50,8 +38,10 @@ public class CapituloFragment extends Fragment {
     @Override
     public void onCreate (Bundle bundle){
         super.onCreate(bundle);
+        //ToDo Llamar de las preferences el Libro donde se esta.
+        /*
         if (bundle == null){
-            cantidadCapitulos.clear();
+            //cantidadCapitulos.clear();
         }else{
             cantidadCapitulos= bundle.getStringArrayList("cantidadCapitulos");
             for (int i = 0; i <= biblia.getCapituloFinal() - 1; i++) {
@@ -61,7 +51,7 @@ public class CapituloFragment extends Fragment {
             Log.v ("CapitulosBundle","-------------tamaño de lista-------------");
             Log.v("CapitulosBundle"," "+cantidadCapitulos.size());
 
-        }
+        }*/
     }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -75,7 +65,7 @@ public class CapituloFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putStringArrayList("cantidadCapitulos", (ArrayList<String>) cantidadCapitulos);
+       // outState.putStringArrayList("cantidadCapitulos", (ArrayList<String>) cantidadCapitulos);
 
         //Save the fragment's state here
     }
@@ -86,35 +76,42 @@ public class CapituloFragment extends Fragment {
         //Se declara la una vista  para inflarse y se asocia con el layout=  "Capitulo_layout"
         View viewCapituloFragment= inflater.inflate(R.layout.capitulo_layout,container,false);
         ButterKnife.bind(this,viewCapituloFragment);// no se para que sirve;
-        if (savedInstanceState== null){
-            //como el fragmento se creo la primera vez no hacer nada
-        }else{
 
-            CapituloAdapter adapter = new CapituloAdapter(cantidadCapitulos, interfaz);
+        /*if (savedInstanceState== null){//ToDo Mostrar el capitulo en el que se está, sacado de las preferences
+            //como el fragmento se creo la primera vez no hacer nada
+        }else{*/
+
+            //adapter = new CapituloAdapter(new ArrayList<String>(), interfaz);
+            adapter = null;
             GridLayoutManager Layoutmanager = new GridLayoutManager(getContext(), 6);
             recycler_capitulo.setLayoutManager(Layoutmanager);
             recycler_capitulo.setHasFixedSize(true);
             recycler_capitulo.setAdapter(adapter);
-            viewCapituloFragment= inflater.inflate(R.layout.capitulo_layout,container,false);
             return viewCapituloFragment;
-        }
-        return  viewCapituloFragment;
+        /*}
+        return  viewCapituloFragment;*/
     }
 
-    public void mostrarCapitulo(String libro) {
-       /*
-        if (cantidadCapitulos.size() !=0) {
-            cantidadCapitulos.clear();
+    public void mostrarCapitulo(int cantidadCapitulos) {
+
+        int i =0;
+        List<String> capitulos= new ArrayList<>();
+        while(i<=cantidadCapitulos){
+            capitulos.add(""+(i+1));
+            Log.d("Sandro", capitulos.get(i));
+            i++;
         }
-        */
-        CapituloAdapter adapter = new CapituloAdapter(cantidadCapitulos, interfaz);
-        GridLayoutManager Layoutmanager = new GridLayoutManager(getContext(), 6);
+
+        Log.d("Sandro", "mostrarCapitulo: ");
+        adapter = new CapituloAdapter(capitulos, interfaz);
+        recycler_capitulo.setAdapter(adapter);
+
         //Hago consulta a la BDD
         //Se pasa por parametro por aqui los libros de la biblia que se saca de la bases de datos
         //Lleno la lista y se la paso al adapter (El adapter recibe Interfaz!)
         //Le pongo layut manager y adapter al Recycler View
         //Consulta de la bases de datos, para obtener el ultimo capitulo
-        try {
+       /* try {
             MyDataBase mdb = new MyDataBase(getContext().getApplicationContext(), 0);
             SQLiteDatabase db = mdb.getWritableDatabase();
             Cursor cursor;
@@ -148,11 +145,9 @@ public class CapituloFragment extends Fragment {
         }
         //  muestro lleno lista de capitulos
         Log.v ("Capitulos","-------------tamaño de lista-------------");
-        Log.v("Capitulos"," "+cantidadCapitulos.size());
+        Log.v("Capitulos"," "+cantidadCapitulos.size());*/
 
-        recycler_capitulo.setLayoutManager(Layoutmanager);
-        recycler_capitulo.setHasFixedSize(true);
-        recycler_capitulo.setAdapter(adapter);
+        //recycler_capitulo.setAdapter(adapter);
     }
 
 }

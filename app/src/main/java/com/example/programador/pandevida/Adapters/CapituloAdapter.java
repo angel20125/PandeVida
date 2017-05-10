@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.example.programador.pandevida.Interfaces.InterfazComunicacion;
+import com.example.programador.pandevida.Interfaces.InterfazComunicacionTabs;
 import com.example.programador.pandevida.R;
 import java.util.List;
 import static com.example.programador.pandevida.MainActivity.biblia;
@@ -19,15 +19,15 @@ public class CapituloAdapter extends RecyclerView.Adapter<CapituloAdapter.Capitu
 
     //Atriburtos
     List<String> capitulos;
-    InterfazComunicacion interfaz;
+    InterfazComunicacionTabs interfaz;
 
     //Constructor
     /*
         Constructutor de CapituloAdapter, su fucnion  es:  recibir por parametro, los datos que se van
         a mostrar en este caso los libros.
-        y la InterfazComunicacion, que es la encargada de comunicar los fragmentos
+        y la InterfazComunicacionTabs, que es la encargada de comunicar los fragmentos
     */
-    public CapituloAdapter(List<String> capitulos, InterfazComunicacion interfaz) {
+    public CapituloAdapter(List<String> capitulos, InterfazComunicacionTabs interfaz) {
         this.capitulos = capitulos;
         this.interfaz = interfaz;
     }
@@ -63,7 +63,7 @@ public class CapituloAdapter extends RecyclerView.Adapter<CapituloAdapter.Capitu
         final CapituloViewHolder holder = new CapituloViewHolder(v);
         /*
         *En esta seccion se hace que la variable fondo que es  contenedor Framelayout  reacione al evento de tipo click y
-        *tambien en esta seccion es donde se envia la informacion atraves de la InterfazComunicacion para que los otros
+        *tambien en esta seccion es donde se envia la informacion atraves de la InterfazComunicacionTabs para que los otros
         *fragmentos puedan recibir la informacion.
         */
 

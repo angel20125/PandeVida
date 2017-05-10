@@ -1,7 +1,5 @@
 package com.example.programador.pandevida.Adapters;
 
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,15 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.programador.pandevida.Interfaces.InterfazComunicacion;
 
 import com.example.programador.pandevida.R;
 
 import java.util.List;
 
-import static com.example.programador.pandevida.MainActivity.contextMain;
 
 
 /**
@@ -27,11 +21,9 @@ import static com.example.programador.pandevida.MainActivity.contextMain;
 public class LecturaAdapter extends RecyclerView.Adapter<LecturaAdapter.LecturaViewHolder> {
     //atibutuos
     List<String> listVersos;
-    InterfazComunicacion interfaz;
     //constructor
-    public LecturaAdapter(List<String> listVersos, InterfazComunicacion interfaz){
+    public LecturaAdapter(List<String> listVersos){
         this.listVersos=listVersos;
-        this.interfaz=interfaz;
 
     }
 
@@ -54,7 +46,7 @@ public class LecturaAdapter extends RecyclerView.Adapter<LecturaAdapter.LecturaV
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.lectura_item, parent, false);
         final LecturaViewHolder holder = new LecturaViewHolder(v);
 
-        holder.fondo.setOnClickListener(new View.OnClickListener() {
+        /*holder.fondo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                if(interfaz!=null){
@@ -67,7 +59,7 @@ public class LecturaAdapter extends RecyclerView.Adapter<LecturaAdapter.LecturaV
                    Log.v("Angel"," LecturaAdapter  SI NULL");
                }
             }
-        });
+        });*/
         return holder;
     }
 
