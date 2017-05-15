@@ -94,11 +94,10 @@ public class CapituloFragment extends Fragment {
 
     public void mostrarCapitulo(int cantidadCapitulos) {
 
-        int i =0;
+        int i =1;
         List<String> capitulos= new ArrayList<>();
         while(i<=cantidadCapitulos){
-            capitulos.add(""+(i+1));
-            Log.d("Sandro", capitulos.get(i));
+            capitulos.add(""+(i));
             i++;
         }
 
@@ -106,48 +105,6 @@ public class CapituloFragment extends Fragment {
         adapter = new CapituloAdapter(capitulos, interfaz);
         recycler_capitulo.setAdapter(adapter);
 
-        //Hago consulta a la BDD
-        //Se pasa por parametro por aqui los libros de la biblia que se saca de la bases de datos
-        //Lleno la lista y se la paso al adapter (El adapter recibe Interfaz!)
-        //Le pongo layut manager y adapter al Recycler View
-        //Consulta de la bases de datos, para obtener el ultimo capitulo
-       /* try {
-            MyDataBase mdb = new MyDataBase(getContext().getApplicationContext(), 0);
-            SQLiteDatabase db = mdb.getWritableDatabase();
-            Cursor cursor;
-            cursor = db.rawQuery("SELECT * FROM 'books_fts'"+
-                    "WHERE human="+"'"+libro+"'",null);
-            if(cursor.moveToFirst()){
-                Log.v("CapituloFragment", "SI TIENE REGISTRO  "+cursor.getString(1));
-                biblia.setCapituloFinal(cursor.getInt(3));
-                biblia.setOsis(cursor.getString(1));
-            }else{
-                Log.v("CapituloFragment","NO TIENE REGISTRO");
-            }
-            cursor.close();
-            cursor.close();
-            mdb.close();
-            mdb.finalize();
-        }catch (Exception e){
-            Log.v("CapituloFragment","Error en la bases de datos en Capitulos");
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-        int indice = 1;
-        String cadena = "";
-        for (int i = 0; i <= biblia.getCapituloFinal() - 1; i++) {
-            cantidadCapitulos.add(i, cadena.valueOf(indice));
-            indice++;
-        }
-        //Muestro la cantidad de versiculos por el Log
-        for (int i = 0; i <= biblia.getCapituloFinal() - 1; i++) {
-            Log.v("Capitulos", " " + cantidadCapitulos.get(i));
-        }
-        //  muestro lleno lista de capitulos
-        Log.v ("Capitulos","-------------tamaño de lista-------------");
-        Log.v("Capitulos"," "+cantidadCapitulos.size());*/
-
-        //recycler_capitulo.setAdapter(adapter);
     }
 
 }

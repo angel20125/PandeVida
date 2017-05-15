@@ -65,7 +65,7 @@ public class VersiculoFragment extends Fragment {
 
         int i =1;
         List<String> versiculos= new ArrayList<>();
-        while(i!=cantidadVersiculos){
+        while(i<=cantidadVersiculos){
             versiculos.add(i+"");
             i++;
         }
@@ -73,21 +73,6 @@ public class VersiculoFragment extends Fragment {
         adapter = new VersiculoAdapter(versiculos, interfaz);
         recycler_versiculo.setAdapter(adapter);
 
-        //Hago consulta a la BDD
-        //Se pasa por parametro por aqui los libros de la biblia que se saca de la bases de datos
-        //Lleno la lista y se la paso al adapter (El adapter recibe Interfaz!)
-        //Le pongo layout manager y adapter al Recycler View
-
-        /*int indice = 1;
-        String cadena = "";
-        for (int i = 0; i <= biblia.getVersoFinal()- 1; i++) {
-            cantidadVersiculos.add(i, cadena.valueOf(indice));
-            indice++;
-        }*/
-        //  muestro lleno lista de capitulos
-       // Log.v("VersiculoFragment","-------------tamaño de lista-------------");
-        //Log.v("VersiculoFragment"," "+cantidadVersiculos.size());
-       // Log.v("VersiculoFragment ", biblia.getOsis()+" "+biblia.getCapitulo()+" "+ ((int)biblia.getVerso()));
     }
 
 }

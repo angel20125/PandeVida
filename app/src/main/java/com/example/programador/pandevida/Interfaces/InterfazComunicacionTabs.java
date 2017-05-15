@@ -8,7 +8,7 @@ package com.example.programador.pandevida.Interfaces;
 //InterfazComunicacionTabs  es la encargada de comunicar los fragmentos entre ellos
 public interface InterfazComunicacionTabs {
 
-    void IrACapitulo(String libro, int CantidadDeCapitulos);
+    void IrACapitulo(int CantidadDeCapitulos);
 
     void IrAVersiculo(int capitulo);
 

@@ -53,27 +53,30 @@ public class VersiculoAdapter extends RecyclerView.Adapter<VersiculoAdapter.Vers
         final VersiculoViewHolder holder = new VersiculoViewHolder(v);
 
 
+
+        return holder;
+    }
+
+    @Override
+    public void onBindViewHolder(VersiculoViewHolder holder, final int position) {
+        holder.numero_versiculo.setText(versiculos.get(position));
+
         holder.fondo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(interfaz!=null){
-                    biblia.setVerso((holder.getAdapterPosition()+1));
-                    Log.v("Angel","VersiculoAdapter Numero de versiculo es: "+holder.getAdapterPosition()+1);
+                    biblia.setVerso((position+1));
+                    Log.v("Angel","VersiculoAdapter Numero de versiculo es: "+position+1);
                     Log.v("Angel","VersiculoAdapter Numero de versiculo es: "+biblia.getVerso());
-                    //ToDo Arreglar comunicacion de adapter con MainActivity
+
+
+
                     interfaz.IrALectura();//donde se envia la informacion atraves de interfaz
                 }else{
                     Log.v("Angel","VersiculoAdapter Interfaz nula!");
                 }
             }
         });
-        return holder;
-    }
-
-    @Override
-    public void onBindViewHolder(VersiculoViewHolder holder, int position) {
-        holder.numero_versiculo.setText(versiculos.get(position));
-
     }
 
     @Override

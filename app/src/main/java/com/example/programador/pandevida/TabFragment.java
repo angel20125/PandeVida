@@ -11,7 +11,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.programador.pandevida.Interfaces.InterfazComunicacionMainActivity;
 import com.example.programador.pandevida.Interfaces.InterfazComunicacionTabs;
+import com.example.programador.pandevida.Utils.Constantes;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import static com.example.programador.pandevida.MainActivity.biblia;
@@ -27,7 +31,7 @@ public class TabFragment extends Fragment {
     @BindView(R.id.viewpager)
     public ViewPager viewPager;
 
-    private InterfazComunicacionTabs interfaz;
+    private static InterfazComunicacionMainActivity MainActivity;
 
     @Nullable
     @Override
@@ -40,11 +44,14 @@ public class TabFragment extends Fragment {
         ButterKnife.bind(this,view);
         viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
+        MainActivity.CambiarTitulo("Pan de Vida");
+        MainActivity.CambiarToolbar(false);
         return view;
     }
 
-    public static Fragment NewInstance() {
+    public static Fragment NewInstance(InterfazComunicacionMainActivity interfaz) {
         TabFragment fragment = new TabFragment();
+        MainActivity = interfaz;
 
         return fragment;
     }
@@ -60,11 +67,10 @@ public class TabFragment extends Fragment {
          * Se declaran los fragmentos a mostrar,y se hace una vez, esto es para no perder la informacion se debe mostrar
          * para pasar los datos  entre ellos, y no perder la informacion mostrada
         */
+
         LibroFragment       fragmento_libro;
         CapituloFragment    fragmento_capitulo;
         VersiculoFragment   fragmento_versiculo;
-        //LecturaFragment     fragmento_lectura;
-        //FavoritoFragment    fragmento_favoritos;
 
         //Constructor: tiene como funcion: inicializar los fragmentos
         public MyAdapter(FragmentManager fm) {
@@ -92,8 +98,6 @@ public class TabFragment extends Fragment {
               case 0 : return fragmento_libro;
               case 1 : return fragmento_capitulo;
               case 2 : return fragmento_versiculo;
-              //case 3 : return fragmento_lectura;
-              //case 4 : return fragmento_favoritos;
           }
 
         return null;
@@ -119,19 +123,16 @@ public class TabFragment extends Fragment {
                     return "Capitulo";
                 case 2 :
                     return "Versiculo";
-                /*case 3 :
-                   return "Lectura";
-                case 4 :
-                    return "Favoritos";*/
+
             }
                 return null;
         }
 
         @Override
-        public void IrACapitulo(String libro, int CantidadDeCapitulos) {
-            //Log.d("Angel  en TabFragment", "IrACapitulo: interfaz!! Capitulo Final: "+libro);
+        public void IrACapitulo(int CantidadDeCapitulos) {
             fragmento_capitulo.mostrarCapitulo(CantidadDeCapitulos); //Aqui le digo al Fragment que se actualice su informacion
             viewPager.setCurrentItem((viewPager.getCurrentItem()+1));
+
         }
 
         @Override
@@ -145,9 +146,9 @@ public class TabFragment extends Fragment {
 
         @Override
         public void IrALectura() {
-            Log.v("Angel  en TabFragment", "IrALectura: interfaz!! LLEGO AQUI!!");
+            Log.v("Angel  en TabFragment", "IrAFragment: interfaz!! LLEGO AQUI!!");
 
-
+            MainActivity.IrAFragment(Constantes.FRAGMENT_LECTURA);
         }
     }
 

@@ -94,9 +94,43 @@ public class SQLiteManager {
         //Se pasa por parametro por aqui los libros de la biblia que se saca de la bases de datos
         //Lleno la lista y se la paso al adapter (El adapter recibe Interfaz!)
         //Le pongo layut manager y adapter al Recycler View
-        Log.v("Manyulas","Biblia  Osis"+biblia.getOsis()+"  Biblia Capitula "+ biblia.getCapitulo());
         List<String> Versos = new ArrayList<>();
         try {
+            MyDataBase mdb = new MyDataBase(context.getApplicationContext(), 0);
+            SQLiteDatabase db = mdb.getWritableDatabase();
+            Cursor cursor;
+            cursor = db.rawQuery("SELECT * FROM 'bible_fts'"+
+                    "WHERE book="+"'"+biblia.getOsis()+"'"+
+                    "AND chapter="+"'"+biblia.getCapitulo()+"'",null);
+
+            if(cursor.moveToFirst()){
+
+                int numeroVerso=1;
+                while(cursor.isAfterLast()!=true){
+                    Versos.add((numeroVerso+". "+cursor.getString(3)));
+                    cursor.moveToNext();
+                    numeroVerso++;
+                }
+            }else{
+                Log.v("LecturaFragment","error en VersiculoFragment: no se pudo leer el ultimo registro en");
+            }
+            db.close();
+            cursor.close();
+            mdb.close();
+            mdb.finalize();
+        }catch (Exception e){
+            Log.v("LecturaFragment","Error en la conexcion de bases de datos");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        return Versos;
+    }
+
+    public String getNombreDeBiblia (Context context){
+
+//ToDo Hace falta arreglar la BDD para que dé bien el nombre
+
+        /*try {
             MyDataBase mdb = new MyDataBase(context.getApplicationContext(), 0);
             SQLiteDatabase db = mdb.getWritableDatabase();
             Cursor cursor;
@@ -129,12 +163,12 @@ public class SQLiteManager {
             }
             Log.v("LecturaFragment", "---------------------------------");
             Log.v("LecturaFragment", " Tamaño: "+ cantidadVersos.size());*/
-        }catch (Exception e){
+        /*}catch (Exception e){
             Log.v("LecturaFragment","Error en la conexcion de bases de datos");
         } catch (Throwable throwable) {
             throwable.printStackTrace();
-        }
-        return Versos;
+        }*/
+        return null;
     }
 
 }

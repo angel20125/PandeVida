@@ -6,6 +6,10 @@ package com.example.programador.pandevida.Interfaces;
 
 public interface InterfazComunicacionMainActivity {
 
-    void IrALectura();
+    void IrAFragment(String fragment);
+
+    void CambiarTitulo(String titulo);
+
+    void CambiarToolbar(Boolean bool);
 
 }

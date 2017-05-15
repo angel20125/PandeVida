@@ -66,6 +66,7 @@ public class LecturaAdapter extends RecyclerView.Adapter<LecturaAdapter.LecturaV
     @Override
     public void onBindViewHolder(LecturaAdapter.LecturaViewHolder holder, int position) {
         holder.versoTV.setText(listVersos.get(position));
+
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.example.programador.pandevida;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,11 +14,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.programador.pandevida.Interfaces.InterfazComunicacionMainActivity;
+import com.example.programador.pandevida.Utils.Constantes;
 import com.example.programador.pandevida.basesdedatos.Biblia;
 
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -26,25 +31,28 @@ public class MainActivity extends AppCompatActivity
 
     // variables que se usan globalmente
     public static Biblia biblia= new Biblia();
-    /*public static String [] arrayLibroHuman = new String[66];
-    public static List<String> cantidadCapitulos= new ArrayList<>();
-    public static List<String> cantidadVersiculos= new ArrayList<>();
-    public static List<String> cantidadVersos = new ArrayList<>();*/
 
     //ToDo quitar de static todo lo que pueda causar problemas
 
-
     private FragmentManager mFragmentManager;
     private FragmentTransaction mFragmentTransaction;
+
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -53,9 +61,15 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        SharedPreferences prefs = getSharedPreferences(Constantes.ULTIMA_LECTURA_PREFERENCE, MODE_PRIVATE);
+        biblia.setLibro(prefs.getString("Libro", "Génesis"));
+        biblia.setOsis(prefs.getString("Osis", "Gen"));
+        biblia.setCapitulo(prefs.getInt("Capitulo", 1));
+        biblia.setVerso(prefs.getInt("Verso", 1));
+
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
-        mFragmentTransaction.replace(R.id.containerView,LecturaFragment.NewInstance()).commit();
+        mFragmentTransaction.replace(R.id.containerView,LecturaFragment.NewInstance(this)).commit();
 
         /**
          * Setup click events on the Navigation View Items.
@@ -65,7 +79,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -115,21 +128,63 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
     @OnClick(R.id.fab)
-    public void mostrarLectura(){
-        Log.d("Sandro", "mostrarLectura: onclick FAB");
+    public void mostrarIndice(){
+        Log.d("Sandro", "Main Activity: onclick FAB");
+        mostrarFragment("Tabs");
+    }
+//----------------------------- Metodos Propios ----------------------------------------------------
+    public void mostrarFragment(String tipo){
+        Log.d("Sandro", "Cambio al Fragment "+tipo);
+
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
-        mFragmentTransaction.replace(R.id.containerView,TabFragment.NewInstance()).commit();
+        mFragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+
+        switch (tipo){
+
+            case Constantes.FRAGMENT_LECTURA:{
+                mFragmentTransaction.replace(R.id.containerView,LecturaFragment.NewInstance(this)).commit();
+                fab.setVisibility(View.VISIBLE);
+                break;
+            }
+
+            case Constantes.FRAGMENT_TABS:{
+                mFragmentTransaction.replace(R.id.containerView,TabFragment.NewInstance(this)).commit();
+                fab.setVisibility(View.GONE);
+                break;
+            }
+
+        }
+
+    }
+
+//------------------------------- Metodos de la Interfaz -------------------------------------------
+
+    @Override
+    public void IrAFragment(String fragment) {
+        mostrarFragment(fragment);
     }
 
     @Override
-    public void IrALectura() {
-        mostrarLectura();
+    public void CambiarTitulo(String titulo) {
+        toolbar.setTitle(titulo);
+    }
+
+    @Override
+    public void CambiarToolbar(Boolean visible){
+
+        if(visible){
+            toolbar.setVisibility(View.VISIBLE);
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        }else {
+        toolbar.setVisibility(View.GONE);
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
+
     }
 }

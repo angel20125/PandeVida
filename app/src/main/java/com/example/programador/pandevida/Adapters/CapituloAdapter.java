@@ -61,6 +61,16 @@ public class CapituloAdapter extends RecyclerView.Adapter<CapituloAdapter.Capitu
         // Se crea la variable  "holder" de  tipo "LibroViewHolder" y le pasa ṕor parametro la vista
         Integer numero = new Integer(0);
         final CapituloViewHolder holder = new CapituloViewHolder(v);
+
+
+
+        return holder;
+    }
+    //Asigna la informacion a los componentes del Holder
+    @Override
+    public void onBindViewHolder(CapituloViewHolder holder, final int position) {
+            holder.numero_capitulo.setText(capitulos.get(position));
+
         /*
         *En esta seccion se hace que la variable fondo que es  contenedor Framelayout  reacione al evento de tipo click y
         *tambien en esta seccion es donde se envia la informacion atraves de la InterfazComunicacionTabs para que los otros
@@ -78,21 +88,16 @@ public class CapituloAdapter extends RecyclerView.Adapter<CapituloAdapter.Capitu
             public void onClick(View v) {
                 //Your stuff here
                 if(interfaz!=null){
-                    Log.v("CapituloAdapter","CapituloAdapter Click al item! "+ (holder.getAdapterPosition()+1));
-                    biblia.setCapitulo(holder.getAdapterPosition()+1);
+                    Log.v("CapituloAdapter","CapituloAdapter Click al item! "+ (position+1));
+                    biblia.setCapitulo(position+1);
                     Log.v("CapituloAdapter","DATOS SON  "+ biblia.getCapitulo(), null);
-                    interfaz.IrAVersiculo(holder.getAdapterPosition()+1);//donde se envia la informacion atraves de interfaz
+                    interfaz.IrAVersiculo(position+1);//donde se envia la informacion atraves de interfaz
                 }else{
                     Log.v("CapituloAdapter","Interfaz nula!");
                 }
             }
         });
-        return holder;
-    }
-    //Asigna la informacion a los componentes del Holder
-    @Override
-    public void onBindViewHolder(CapituloViewHolder holder, int position) {
-            holder.numero_capitulo.setText(capitulos.get(position));
+
     }
 
     // importante si retorna  cero no se muestra nada

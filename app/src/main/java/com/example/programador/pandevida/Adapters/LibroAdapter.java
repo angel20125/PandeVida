@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.programador.pandevida.Interfaces.InterfazComunicacionTabs;
@@ -42,7 +43,7 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
     public class LibroViewHolder extends RecyclerView.ViewHolder {
 
         TextView nombre_Libro;
-        FrameLayout fondo;
+        LinearLayout fondo;
         //String Nombre_Consulta
          /*
          *Constructor, tiene como funcion recibir una vista y hacer los enlace lógico de un contendor  tipo
@@ -54,7 +55,7 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
             //nombre_Libro = ButterKnife.findById(itemView, R.id.libroTV);//con ButterKnife
             //fondo = ButterKnife.findById(itemView, R.id.layoutLibro);//con ButterKnife
             nombre_Libro= (TextView) itemView.findViewById(R.id.libroTV);
-            fondo= (FrameLayout) itemView.findViewById(R.id.layoutLibro);
+            fondo= (LinearLayout) itemView.findViewById(R.id.layoutLibro);
         }
 
     }
@@ -69,6 +70,15 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.libro_item, viewGroup, false);
         // Se crea la variable  "holder" de  tipo "LibroViewHolder" y le pasa ṕor parametro la vista
         final LibroViewHolder holder = new LibroViewHolder(v);
+
+
+        return holder;
+
+    }
+    //Asigna informacion a los componentes  holder, es decir perzonaliza cada libro_item con la informacion  correspondiente
+    @Override
+    public void onBindViewHolder(LibroViewHolder holder, final int position) {
+        holder.nombre_Libro.setText(libros.get(position).getNombre());
 
         /*
         *En esta seccion se hace que la variable fondo que es  contenedor Framelayout  reacione al evento de tipo click y
@@ -88,24 +98,18 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
             public void onClick(View v) {
                 //Your stuff here
                 if(interfaz!=null){
-                    Log.v("Angel"," "+holder.nombre_Libro.getText());
+                    Log.v("Angel"," "+libros.get(position).getNombre());
 
-                    biblia.setLibro(holder.nombre_Libro.getText().toString());
-                    biblia.setOsis(libros.get(holder.getAdapterPosition()).getOsis());
+                    biblia.setLibro(libros.get(position).getNombre());
+                    biblia.setOsis(libros.get(position).getOsis());
 
-                    interfaz.IrACapitulo((String) holder.nombre_Libro.getText(),libros.get(holder.getAdapterPosition()).getCapitulos());//donde se envia la informacion atraves de interfaz
+                    interfaz.IrACapitulo(libros.get(position).getCapitulos());//donde se envia la informacion atraves de interfaz
                 }else{
                     Log.v("Angel"," LibroAdpater Interfaz nula!");
                 }
             }
         });
-        return holder;
 
-    }
-    //Asigna informacion a los componentes  holder, es decir perzonaliza cada libro_item con la informacion  correspondiente
-    @Override
-    public void onBindViewHolder(LibroViewHolder holder, int position) {
-        holder.nombre_Libro.setText(libros.get(position).getNombre());
     }
 
     @Override

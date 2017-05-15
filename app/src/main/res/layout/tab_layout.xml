@@ -26,6 +26,11 @@
 
     </android.support.v4.view.ViewPager>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="1dp"
+        android:text="Cancelar" />
 
-    <!--android:background="@color/material_blue_grey_800"-->
+</LinearLayout>
