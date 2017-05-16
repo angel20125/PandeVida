@@ -11,31 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e064f240-d95e-4c0b-a0a6-e7da6888afbc" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/CapituloFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/Fragments/CapituloFragment.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/FavoritoFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/Fragments/FavoritoFragment.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/LecturaFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/Fragments/LecturaFragment.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/LibroFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/Fragments/LibroFragment.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/Activities/MainActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/TabFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/Fragments/TabFragment.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/VersiculoFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/Fragments/VersiculoFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/Adapters/CapituloAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/Adapters/CapituloAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/Adapters/LibroAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/Adapters/LibroAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/Adapters/VersiculoAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/Adapters/VersiculoAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/basesdedatos/SQLiteManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/programador/pandevida/basesdedatos/SQLiteManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/lectura_layout.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/lectura_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/libro_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/libro_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/libro_layout.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/libro_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/tab_layout.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/tab_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
     </list>
     <ignored path="PandeVida.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -2519,7 +2499,14 @@
       <option name="project" value="LOCAL" />
       <updated>1494855131220</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Se modifico la parte visual del proyecto.&#10;&#10;Se modifico la estructura de las carpetas.&#10;&#10;Ahora se abre la app desde la ultima lectura abierta.">
+      <created>1494959739762</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1494959739763</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2533,7 +2520,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -2582,7 +2569,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Cambios generales en el proyecto:&#10;&#10;La app abre en Lectura y el Floating Action Button abre el Tab Layout de Libro/Capitulo/Versiculo.&#10;&#10;El Main Activity ahora tiene una interfaz para cambiar de Fragmento principal.&#10;&#10;La base de datos se accede ahora a traves de una clase SQLiteManager, que contiene metodos que consultan, para mejor legibilidad del codigo." />
-    <option name="LAST_COMMIT_MESSAGE" value="Cambios generales en el proyecto:&#10;&#10;La app abre en Lectura y el Floating Action Button abre el Tab Layout de Libro/Capitulo/Versiculo.&#10;&#10;El Main Activity ahora tiene una interfaz para cambiar de Fragmento principal.&#10;&#10;La base de datos se accede ahora a traves de una clase SQLiteManager, que contiene metodos que consultan, para mejor legibilidad del codigo." />
+    <MESSAGE value="Se modifico la parte visual del proyecto.&#10;&#10;Se modifico la estructura de las carpetas.&#10;&#10;Ahora se abre la app desde la ultima lectura abierta." />
+    <option name="LAST_COMMIT_MESSAGE" value="Se modifico la parte visual del proyecto.&#10;&#10;Se modifico la estructura de las carpetas.&#10;&#10;Ahora se abre la app desde la ultima lectura abierta." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
