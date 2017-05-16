@@ -14,7 +14,7 @@ import com.example.programador.pandevida.R;
 import java.util.List;
 
 
-import static com.example.programador.pandevida.MainActivity.biblia;
+import static com.example.programador.pandevida.Activities.MainActivity.biblia;
 
 
 /**

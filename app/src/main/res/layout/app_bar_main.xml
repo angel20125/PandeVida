@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.programador.pandevida.MainActivity">
+    tools:context="com.example.programador.pandevida.Activities.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -16,8 +16,56 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/greenEsmerald"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:background="@color/white"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:theme="@style/ToolBarStyle">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!--<ImageView
+                    android:id="@+id/hamburguer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/ic_chevron_left_black_36dp"
+                    android:tint="@color/colorPrimaryDark" />-->
+
+                <ImageView
+                    android:id="@+id/Toolbar_Back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_toLeftOf="@+id/Toolbar_Title"
+                    android:src="@drawable/ic_chevron_left_black_36dp"
+                    android:tint="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/Toolbar_Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:text="Titulo"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/Toolbar_Next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_toRightOf="@+id/Toolbar_Title"
+                    android:src="@drawable/ic_chevron_right_black_36dp"
+                    android:tint="@color/colorPrimaryDark" />
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -27,7 +75,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:backgroundTint="@color/colorPrimary"
+        app:srcCompat="@android:drawable/ic_menu_search" />
 
     <include layout="@layout/content_main" />
 

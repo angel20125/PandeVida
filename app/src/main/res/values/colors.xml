@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#53c043</color>
+    <color name="colorPrimaryDark">#388d3c</color>
+    <color name="colorAccent">#2ade33</color>
     <color name="black">#000</color>
     <color name="orange">#FA0</color>
-    <color name="white">#FFF</color>
-    <color name="greenEsmerald">#2ecc71</color>
-    <color name="greenNephritis">#27ae60</color>
+    <color name="white">#ffffff</color>
+    <!--<color name="greenEsmerald">#2ecc71</color>
+    <color name="greenNephritis">#27ae60</color>-->
 </resources>

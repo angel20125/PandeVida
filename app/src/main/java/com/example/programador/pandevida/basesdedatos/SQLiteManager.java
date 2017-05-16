@@ -8,7 +8,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.programador.pandevida.MainActivity.biblia;
+import static com.example.programador.pandevida.Activities.MainActivity.biblia;
 
 /**
  * Created by HostSandro on 10/5/2017.

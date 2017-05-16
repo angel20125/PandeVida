@@ -1,36 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_height="wrap_content">
-
+    android:weightSum="10">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimaryDark"
         app:tabGravity="fill"
+        app:tabIndicatorColor="@color/colorAccent"
         app:tabMode="fixed"
-        android:background="@color/greenEsmerald"
-        app:tabIndicatorColor="@color/black"
         app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="@color/white"
+        app:tabTextColor="@color/white"></android.support.design.widget.TabLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8">
+
+        </android.support.v4.view.ViewPager>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.design.widget.TabLayout>
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:layout_weight="1">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
+        <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray" />
 
-    </android.support.v4.view.ViewPager>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="1dp"
-        android:text="Cancelar" />
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:text="Cancelar"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
 </LinearLayout>

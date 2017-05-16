@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,7 +15,7 @@ import com.example.programador.pandevida.basesdedatos.Libro;
 import java.util.List;
 
 
-import static com.example.programador.pandevida.MainActivity.biblia;
+import static com.example.programador.pandevida.Activities.MainActivity.biblia;
 /**
  * Created by angel20125 on 09/04/17.
  */

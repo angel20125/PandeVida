@@ -15,6 +15,6 @@
         android:id="@+id/Recycler_Libro"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="20px"
-        android:layout_marginRight="20px" />
+        android:layout_gravity="center_horizontal" />
+
 </LinearLayout>
