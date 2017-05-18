@@ -10,11 +10,12 @@ import android.widget.TextView;
 
 import com.example.programador.pandevida.Interfaces.InterfazComunicacionTabs;
 import com.example.programador.pandevida.R;
+import com.example.programador.pandevida.basesdedatos.Biblia;
 
 import java.util.List;
 
 
-import static com.example.programador.pandevida.Activities.MainActivity.biblia;
+//import static com.example.programador.pandevida.Activities.MainActivity.biblia;
 
 
 /**
@@ -65,9 +66,9 @@ public class VersiculoAdapter extends RecyclerView.Adapter<VersiculoAdapter.Vers
             @Override
             public void onClick(View v) {
                 if(interfaz!=null){
-                    biblia.setVerso((position+1));
+                    Biblia.setVerso((position+1));
                     Log.v("Angel","VersiculoAdapter Numero de versiculo es: "+position+1);
-                    Log.v("Angel","VersiculoAdapter Numero de versiculo es: "+biblia.getVerso());
+                    Log.v("Angel","VersiculoAdapter Numero de versiculo es: "+Biblia.getVerso());
 
 
 

@@ -1,5 +1,6 @@
 package com.example.programador.pandevida.Fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -11,15 +12,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.programador.pandevida.Interfaces.InterfazComunicacionMainActivity;
 import com.example.programador.pandevida.Interfaces.InterfazComunicacionTabs;
 import com.example.programador.pandevida.R;
 import com.example.programador.pandevida.Utils.Constantes;
+import com.example.programador.pandevida.basesdedatos.Biblia;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import static com.example.programador.pandevida.Activities.MainActivity.biblia;
+import butterknife.OnClick;
+
+import static android.content.Context.MODE_PRIVATE;
+//import static com.example.programador.pandevida.Activities.MainActivity.biblia;
 
 /**
  * Created by Ratan on 7/27/2015.
@@ -32,6 +38,10 @@ public class TabFragment extends Fragment {
     @BindView(R.id.viewpager)
     public ViewPager viewPager;
 
+    @BindView(R.id.CancelarButton)
+    public Button CancelarButton;
+
+    private MyAdapter adapter;
     private static InterfazComunicacionMainActivity MainActivity;
 
     @Nullable
@@ -43,7 +53,8 @@ public class TabFragment extends Fragment {
          */
         View view =  inflater.inflate(R.layout.tab_layout,null);
         ButterKnife.bind(this,view);
-        viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
+        adapter = new MyAdapter(getChildFragmentManager());
+        viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         MainActivity.CambiarTitulo("Pan de Vida");
         MainActivity.CambiarToolbar(false);
@@ -55,6 +66,19 @@ public class TabFragment extends Fragment {
         MainActivity = interfaz;
 
         return fragment;
+    }
+
+    @OnClick(R.id.CancelarButton)
+    public void CancelarBusqueda(){
+        Log.d("Sandro", "CancelarBusqueda");
+
+        SharedPreferences prefs = getActivity().getSharedPreferences(Constantes.ULTIMA_LECTURA_PREFERENCE, MODE_PRIVATE);
+        Biblia.setLibro(prefs.getString("Libro", "Génesis"));
+        Biblia.setOsis(prefs.getString("Osis", "Gen"));
+        Biblia.setCapitulo(prefs.getInt("Capitulo", 1));
+        Biblia.setVerso(prefs.getInt("Verso", 1));
+
+        adapter.IrALectura();
     }
 
     /**
@@ -138,8 +162,8 @@ public class TabFragment extends Fragment {
 
         @Override
         public void IrAVersiculo(int capitulo) {
-            Log.v("Angel  en TabFragment", "IrAVersiculo: interfaz!! libro: "+biblia.getLibro());
-            Log.v("Angel  en TabFragment", "IrAVersiculo: interfaz!! capitulo: "+biblia.getCapitulo());
+            Log.v("Angel  en TabFragment", "IrAVersiculo: interfaz!! libro: "+ Biblia.getLibro());
+            Log.v("Angel  en TabFragment", "IrAVersiculo: interfaz!! capitulo: "+Biblia.getCapitulo());
             //Decirle al Fragment que actualice su informacion
             fragmento_versiculo.mostrarVersiculo(capitulo);
             viewPager.setCurrentItem((viewPager.getCurrentItem()+1));
@@ -151,6 +175,9 @@ public class TabFragment extends Fragment {
 
             MainActivity.IrAFragment(Constantes.FRAGMENT_LECTURA);
         }
+
     }
+
+
 
 }

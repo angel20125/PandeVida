@@ -10,8 +10,10 @@ import android.widget.TextView;
 
 import com.example.programador.pandevida.Interfaces.InterfazComunicacionTabs;
 import com.example.programador.pandevida.R;
+import com.example.programador.pandevida.basesdedatos.Biblia;
+
 import java.util.List;
-import static com.example.programador.pandevida.Activities.MainActivity.biblia;
+//import static com.example.programador.pandevida.Activities.MainActivity.biblia;
 
 
 
@@ -89,8 +91,8 @@ public class CapituloAdapter extends RecyclerView.Adapter<CapituloAdapter.Capitu
                 //Your stuff here
                 if(interfaz!=null){
                     Log.v("CapituloAdapter","CapituloAdapter Click al item! "+ (position+1));
-                    biblia.setCapitulo(position+1);
-                    Log.v("CapituloAdapter","DATOS SON  "+ biblia.getCapitulo(), null);
+                    Biblia.setCapitulo(position+1);
+                    Log.v("CapituloAdapter","DATOS SON  "+ Biblia.getCapitulo(), null);
                     interfaz.IrAVersiculo(position+1);//donde se envia la informacion atraves de interfaz
                 }else{
                     Log.v("CapituloAdapter","Interfaz nula!");

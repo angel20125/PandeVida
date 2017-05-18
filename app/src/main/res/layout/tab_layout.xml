@@ -39,7 +39,7 @@
         android:background="@android:color/darker_gray" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/CancelarButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

@@ -10,12 +10,13 @@ import android.widget.TextView;
 
 import com.example.programador.pandevida.Interfaces.InterfazComunicacionTabs;
 import com.example.programador.pandevida.R;
+import com.example.programador.pandevida.basesdedatos.Biblia;
 import com.example.programador.pandevida.basesdedatos.Libro;
 
 import java.util.List;
 
 
-import static com.example.programador.pandevida.Activities.MainActivity.biblia;
+//import static com.example.programador.pandevida.Activities.MainActivity.biblia;
 /**
  * Created by angel20125 on 09/04/17.
  */
@@ -99,8 +100,8 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
                 if(interfaz!=null){
                     Log.v("Angel"," "+libros.get(position).getNombre());
 
-                    biblia.setLibro(libros.get(position).getNombre());
-                    biblia.setOsis(libros.get(position).getOsis());
+                    Biblia.setLibro(libros.get(position).getNombre());
+                    Biblia.setOsis(libros.get(position).getOsis());
 
                     interfaz.IrACapitulo(libros.get(position).getCapitulos());//donde se envia la informacion atraves de interfaz
                 }else{
