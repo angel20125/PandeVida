@@ -2,6 +2,7 @@ package com.example.programador.pandevida.Activities;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -15,6 +16,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.programador.pandevida.Fragments.LecturaFragment;
@@ -23,7 +28,11 @@ import com.example.programador.pandevida.Interfaces.InterfazComunicacionMainActi
 import com.example.programador.pandevida.R;
 import com.example.programador.pandevida.Utils.Constantes;
 import com.example.programador.pandevida.basesdedatos.Biblia;
+import com.example.programador.pandevida.basesdedatos.Libro;
+import com.example.programador.pandevida.basesdedatos.SQLiteManager;
 
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,7 +43,7 @@ public class MainActivity extends AppCompatActivity
         InterfazComunicacionMainActivity {
 
     // variables que se usan globalmente
-    public static Biblia biblia= new Biblia();
+    //public static Biblia biblia= new Biblia();
 
     //ToDo quitar de static todo lo que pueda causar problemas
 
@@ -53,6 +62,17 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.Toolbar_Title)
     TextView Toolbar_Title;
 
+    @BindView(R.id.ToolbarFrame)
+    FrameLayout ToolbarFrame;
+
+    @BindView(R.id.Toolbar_Back)
+    ImageView Toolbar_Back;
+
+    @BindView(R.id.Toolbar_Next)
+    ImageView Toolbar_Next;
+
+    @BindView(R.id.ToolbarLayout)
+    AppBarLayout ToolbarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,17 +84,15 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-        //toggle.setDrawerIndicatorEnabled(false);
-        //toolbar.setNavigationIcon(null);
-
+        //new Biblia();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         SharedPreferences prefs = getSharedPreferences(Constantes.ULTIMA_LECTURA_PREFERENCE, MODE_PRIVATE);
-        biblia.setLibro(prefs.getString("Libro", "Génesis"));
-        biblia.setOsis(prefs.getString("Osis", "Gen"));
-        biblia.setCapitulo(prefs.getInt("Capitulo", 1));
-        biblia.setVerso(prefs.getInt("Verso", 1));
+        Biblia.setLibro(prefs.getString("Libro", "Génesis"));
+        Biblia.setOsis(prefs.getString("Osis", "Gen"));
+        Biblia.setCapitulo(prefs.getInt("Capitulo", 1));
+        Biblia.setVerso(prefs.getInt("Verso", 1));
 
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
@@ -144,7 +162,7 @@ public class MainActivity extends AppCompatActivity
     @OnClick(R.id.fab)
     public void mostrarIndice(){
         Log.d("Sandro", "Main Activity: onclick FAB");
-        mostrarFragment("Tabs");
+        mostrarFragment(Constantes.FRAGMENT_TABS);
     }
 //----------------------------- Metodos Propios ----------------------------------------------------
     public void mostrarFragment(String tipo){
@@ -181,22 +199,119 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void CambiarTitulo(String titulo) {
-        //toolbar.setTitle(titulo);
-        toolbar.setTitle("");
         Toolbar_Title.setText(titulo);
-
     }
 
     @Override
     public void CambiarToolbar(Boolean visible){
 
         if(visible){
-            toolbar.setVisibility(View.VISIBLE);
+            ToolbarFrame.setVisibility(View.VISIBLE);
+            //ToolbarLayout.animate().translationY(0).setInterpolator(new DecelerateInterpolator()).start();
             drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         }else {
-        toolbar.setVisibility(View.GONE);
+            //ToolbarLayout.animate().translationY(-ToolbarLayout.getBottom()).setInterpolator(new AccelerateInterpolator()).start();
+            ToolbarFrame.setVisibility(View.GONE);
             drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         }
 
     }
+
+    @Override
+    public void CambiarBotonNext(Boolean visible) {
+
+        if(visible){
+            Toolbar_Next.setVisibility(View.VISIBLE);
+        }else {
+            Toolbar_Next.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void CambiarBotonBack(Boolean visible) {
+
+        if(visible){
+            Toolbar_Back.setVisibility(View.VISIBLE);
+        }else {
+            Toolbar_Back.setVisibility(View.GONE);
+        }
+    }
+
+//--------------------------------------OnClicks----------------------------------------------------
+
+    @OnClick(R.id.Toolbar_Back)
+    public void clickedBack(){
+        Log.d("Sandro", "clicked back");
+
+        SQLiteManager Bdd = SQLiteManager.getInstance();
+
+        List<Libro> libros = Bdd.getLibros(getApplicationContext());
+
+        //int capitulos=0;
+        int /*libro =0,*/ i=0;
+        //Busco entre todos los libros hasta llegar al libro en el que estoy
+        for(Libro item : libros){
+            if(item.getOsis().equals(Biblia.getOsis())){
+                //Guardo la cantidad de capitulos que tiene ese Libro
+                //capitulos = item.getCapitulos();
+                //libro=i;
+                break;
+            }
+            i++;
+        }
+
+        //Si aun tiene capitulos por leer, paso al anterior.
+        if(Biblia.getCapitulo()>1){
+            Biblia.setCapitulo(Biblia.getCapitulo()-1);
+            Biblia.setVerso(1);
+            Log.d("Sandro", "clickedNext: verso:"+Biblia.getVerso());
+        }else{
+            //De lo contrario, paso al Libro anterior, capitulo 1, versiculo 1.
+            Biblia.setLibro(libros.get(i-1).getNombre());
+            Biblia.setOsis(libros.get(i-1).getOsis());
+            Biblia.setCapitulo(libros.get(i-1).getCapitulos());
+            Biblia.setVerso(1);
+            Log.d("Sandro", "clickedBack: verso:"+Biblia.getVerso());
+        }
+        mostrarFragment(Constantes.FRAGMENT_LECTURA);
+    }
+
+    @OnClick(R.id.Toolbar_Next)
+    public void clickedNext(){
+        Log.d("Sandro", "clicked next");
+            SQLiteManager Bdd = SQLiteManager.getInstance();
+
+            List<Libro> libros = Bdd.getLibros(getApplicationContext());
+
+            int capitulos=0;
+            int /*libro =0,*/ i=0;
+            //Busco entre todos los libros hasta llegar al libro en el que estoy
+            for(Libro item : libros){
+                if(item.getOsis().equals(Biblia.getOsis())){
+                    //Guardo la cantidad de capitulos que tiene ese Libro
+                    capitulos = item.getCapitulos();
+                    //libro=i;
+                    break;
+                }
+                i++;
+            }
+
+            //Si aun tiene capitulos por leer, paso al proximo.
+            if(Biblia.getCapitulo()<capitulos){
+                Biblia.setCapitulo(Biblia.getCapitulo()+1);
+                Biblia.setVerso(1);
+                Log.d("Sandro", "clickedNext: verso:"+Biblia.getVerso());
+            }else{
+                //De lo contrario, paso al proximo Libro, capitulo 1, versiculo 1.
+                Biblia.setLibro(libros.get(i+1).getNombre());
+                Biblia.setOsis(libros.get(i+1).getOsis());
+                Biblia.setCapitulo(1);
+                Biblia.setVerso(1);
+                Log.d("Sandro", "clickedNext: verso:"+Biblia.getVerso());
+            }
+
+            mostrarFragment(Constantes.FRAGMENT_LECTURA);
+
+    }
+
 }

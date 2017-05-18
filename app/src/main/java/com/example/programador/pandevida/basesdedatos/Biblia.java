@@ -61,20 +61,20 @@ public final class  Biblia extends Application implements Serializable  {
         Biblia.osis = osis;
     }
 
-    public void setLibro(String libro) {this.libro = libro;}
+    public static void setLibro(String libro) {Biblia.libro = libro;}
 
     public static int getCapitulo() {return capitulo;}
 
-    public void setCapitulo(int capitulo) {
-        this.capitulo = capitulo;
+    public static void setCapitulo(int capitulo) {
+        Biblia.capitulo = capitulo;
     }
 
     public static int getVerso() {
         return verso;
     }
 
-    public void setVerso(int verso) {
-        this.verso = verso;
+    public static void setVerso(int verso) {
+        Biblia.verso = verso;
     }
 
     public static String getContenido() {

@@ -15,13 +15,15 @@ import com.example.programador.pandevida.Adapters.LecturaAdapter;
 import com.example.programador.pandevida.Interfaces.InterfazComunicacionMainActivity;
 import com.example.programador.pandevida.R;
 import com.example.programador.pandevida.Utils.Constantes;
+import com.example.programador.pandevida.basesdedatos.Biblia;
 import com.example.programador.pandevida.basesdedatos.SQLiteManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.programador.pandevida.Activities.MainActivity.biblia;
+//import static com.example.programador.pandevida.Activities.MainActivity.biblia;
+//import static com.example.programador.pandevida.Activities.MainActivity.Biblia;
 
 /*Esta clase se encarga de consultar a la bases de datos para mostrar
 la lectura del libro, capitulo y versiculo mostrado*/
@@ -47,25 +49,41 @@ public class LecturaFragment extends Fragment {
         LecturaAdapter adapter= new LecturaAdapter(Bdd.getLectura(getContext()));
 
         SharedPreferences.Editor editor = getActivity().getSharedPreferences(Constantes.ULTIMA_LECTURA_PREFERENCE, MODE_PRIVATE).edit();
-        editor.putString("Osis", biblia.getOsis());
-        editor.putString("Libro", biblia.getLibro());
-        editor.putInt("Capitulo", biblia.getCapitulo());
-        editor.putInt("Verso", biblia.getVerso());
+        editor.putString("Osis", Biblia.getOsis());
+        editor.putString("Libro", Biblia.getLibro());
+        editor.putInt("Capitulo", Biblia.getCapitulo());
+        editor.putInt("Verso", Biblia.getVerso());
         editor.apply();
 
-        SharedPreferences prefs = getActivity().getSharedPreferences(Constantes.ULTIMA_LECTURA_PREFERENCE, MODE_PRIVATE);
-        Log.d("Sandro", "Osis: "+prefs.getString("Osis", "Gen"));
-        Log.d("Sandro", "Libro: "+prefs.getString("Libro", "Génesis"));
-        Log.d("Sandro", "Capitulo: "+prefs.getInt("Capitulo", 1));
-        Log.d("Sandro", "Verso: "+prefs.getInt("Verso", 1));
+        MainActivity.CambiarBotonNext(true);
+        MainActivity.CambiarBotonBack(true);
 
+        if(Biblia.getLibro().equals("Apocalipsis")&&Biblia.getCapitulo()==22){
+            MainActivity.CambiarBotonNext(false);
+        }
+
+        if(Biblia.getLibro().equals("Génesis")&&Biblia.getCapitulo()==1){
+            MainActivity.CambiarBotonBack(false);
+        }
+
+
+        SharedPreferences prefs = getActivity().getSharedPreferences(Constantes.ULTIMA_LECTURA_PREFERENCE, MODE_PRIVATE);
+        Log.d("Sandro", "Preferences: Osis: "+prefs.getString("Osis", "Gen"));
+        Log.d("Sandro", "Preferences: : "+prefs.getString("Libro", "Génesis"));
+        Log.d("Sandro", "Preferences: Capitulo: "+prefs.getInt("Capitulo", 1));
+        Log.d("Sandro", "Preferences: Verso: "+prefs.getInt("Verso", 1));
+
+        Log.d("Sandro", "Static: Osis: "+Biblia.getOsis());
+        Log.d("Sandro", "Static: Libro: "+Biblia.getLibro());
+        Log.d("Sandro", "Static: Capitulo: "+Biblia.getCapitulo());
+        Log.d("Sandro", "Static: Verso: "+Biblia.getVerso());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recycler_lectura.setLayoutManager(layoutManager);
-        recycler_lectura.scrollToPosition(biblia.getVerso()-1);// en esta seccion se le dice al scroll que  se coloque en el versiculo seleccionado
+        recycler_lectura.scrollToPosition(Biblia.getVerso()-1);// en esta seccion se le dice al scroll que  se coloque en el versiculo seleccionado
         recycler_lectura.setHasFixedSize(true);
         recycler_lectura.setAdapter(adapter);
-        MainActivity.CambiarTitulo(biblia.getLibro());
+        MainActivity.CambiarTitulo(Biblia.getLibro());
         MainActivity.CambiarToolbar(true);
 
         return viewLecturaFragment;

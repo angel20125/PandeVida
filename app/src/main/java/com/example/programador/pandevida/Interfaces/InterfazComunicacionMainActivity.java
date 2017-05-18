@@ -10,6 +10,9 @@ public interface InterfazComunicacionMainActivity {
 
     void CambiarTitulo(String titulo);
 
-    void CambiarToolbar(Boolean bool);
+    void CambiarToolbar(Boolean visible);
 
+    void CambiarBotonNext(Boolean visible);
+
+    void CambiarBotonBack(Boolean visible);
 }
